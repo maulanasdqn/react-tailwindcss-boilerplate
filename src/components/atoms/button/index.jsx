@@ -8,7 +8,7 @@ export const Button = (props) => {
     "p-6 text-lg": props.size === "lg",
   })
 
-  const buttonVariant = clsx("rounded-lg font-medium ",{
+  const buttonVariant = clsx("rounded-lg font-medium disabled:bg-gray-400 disabled:text-gray-50 disabled:border-gray-400",{
     "bg-blue-500 text-white border border-blue-500 ": props.variant === "primary",
     "bg-white text-blue-500 border border-blue-500 ": props.variant === "primary-outline",
     "bg-red-600 text-white border border-red-600 ": props.variant === "error",
