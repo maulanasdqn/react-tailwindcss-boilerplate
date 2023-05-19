@@ -1,10 +1,14 @@
 import clsx from "clsx"
 import { useController } from "react-hook-form"
+import { AiFillCloseCircle, AiFillCheckCircle } from "react-icons/ai"
+import { RiErrorWarningFill } from "react-icons/ri"
 
 export const TextField = (props) => {
 
   const { field } = useController({...props, rules:{
-    required: props.required
+    required: props.required,
+    minLength: props.min,
+    maxLength: props.max
   }})
 
   const inputSize = clsx({
@@ -20,13 +24,13 @@ export const TextField = (props) => {
     "bg-orange-50 border-orange-500 text-orange-900 placeholder:text-orange-500 ": props.status === "warning",
   })
 
-  const messageSize = clsx("font-regular ",{
+  const messageSize = clsx("font-regular flex gap-x-1 items-center",{
     "text-xs ": props.size === "sm" || !props.size,
     "text-sm ": props.size === "md",
     "text-md ": props.size === "lg"
   })
 
-  const labelClassName = clsx("font-medium ",{
+  const labelClassName = clsx("font-medium text-gray-600 ",{
     "text-sm ": props.size === "sm" || !props.size,
     "text-md ": props.size === "md",
     "text-lg ": props.size === "lg"
@@ -55,7 +59,21 @@ export const TextField = (props) => {
       </div>
       <div className="flex flex-col gap-y-1">
         <input className={inputClassName} {...{...props, ...field}} />
-        <span className={messageClassName}>{props.message}</span>
+        <span className={messageClassName}>
+          {props.status === "error" && (
+            <AiFillCloseCircle />
+          )}
+
+          {props.status === "success" && (
+            <AiFillCheckCircle />
+          )}
+
+          {props.status === "warning" && (
+            <RiErrorWarningFill />
+          )}
+
+          {props.message}
+        </span>
       </div>
     </section>
   )
