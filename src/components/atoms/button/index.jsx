@@ -2,10 +2,10 @@ import clsx from "clsx"
 
 export const Button = (props) => {
 
-  const buttonSize = clsx("py-2 w-full h-auto hover:opacity-75",{
-    "px-2 text-sm": props.size === "sm",
-    "px-4 text-md": props.size === "md",
-    "px-6 text-lg": props.size === "lg",
+  const buttonSize = clsx("w-full h-auto hover:opacity-75",{
+    "p-2 text-sm": props.size === "sm",
+    "p-4 text-md": props.size === "md",
+    "p-6 text-lg": props.size === "lg",
   })
 
   const buttonVariant = clsx("rounded-lg font-medium ",{
