@@ -1,10 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom';
+import { routes } from './routers/index.jsx';
 import 'tailwindcss/tailwind.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+const htmlElement = document.getElementById("root");
+const root = createRoot(htmlElement);
+
+root.render(
+  <StrictMode>
+    <RouterProvider router={routes} />
+  </StrictMode>,
 )

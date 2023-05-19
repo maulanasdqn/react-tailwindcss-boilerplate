@@ -1,6 +1,6 @@
-import { Button } from './components'
+import { Button } from '../components'
 
-function App() {
+const Home = () => {
   return (
     <section className="flex items-center justify-center h-screen w-full">
       <form className="flex flex-col justify-between h-1/2 p-8 bg-white shadow-md rounded-lg w-1/2">
@@ -25,4 +25,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
