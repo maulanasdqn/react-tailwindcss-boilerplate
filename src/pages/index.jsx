@@ -1,4 +1,4 @@
-import { Button } from '@/components'
+import { Button, TextField } from '@/components'
 
 const Home = () => {
   return (
@@ -8,6 +8,7 @@ const Home = () => {
         <Button type="submit" variant="primary" size="md">
           Masuk
         </Button>
+        <TextField type="text" placeholder="Masukan nama" size="md" status="none" />
         <span>Or</span>
         <div className="flex gap-x-8">
           <Button type="button" variant="primary-outline" size="md">
