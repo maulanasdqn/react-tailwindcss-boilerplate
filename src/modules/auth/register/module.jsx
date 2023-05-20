@@ -10,14 +10,22 @@ export const RegisterModule = () => {
   
   const validationSchema = z
   .object({
-    email: z.string().min(1, { message: 'Email harus diisi' }).email({
+    email: z.string()
+    .min(1, { message: 'Email tidak boleh kosong' })
+    .email({
       message: 'Email harus valid',
     }),
-    fullname: z.string().min(2, { message: 'Nama Lengkap harus diisi' }),
-    password: z.string().min(8, { message: 'Password harus diisi' }),
+    fullname: z.string()
+    .min(1, { message: 'Nama Lengkap tidak boleh kosong' })
+    .min(2, { message: 'Nama Lengkap setidaknya lebih dari 2 karakter' })
+    .max(60, { message: 'Nama Lengkap tidak boleh lebih dari 60 karakter' }),
+    password: z.string()
+    .min(1, { message: 'Kata sandi tidak boleh kosong' })
+    .min(8, { message: 'Kata sandi harus 8 karakter atau lebih' }),
     confirm_password: z
       .string()
-      .min(1, { message: 'Konfirmasi kata sandi harus disisi' }),
+      .min(1, { message: 'Konfirmasi kata sandi tidak boleh kosong' })
+      .min(8, { message: 'Konfirmasi kata sandi harus 8 karakter atau lebih' }),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: 'Konfirmasi kata sandi tidak valid',
