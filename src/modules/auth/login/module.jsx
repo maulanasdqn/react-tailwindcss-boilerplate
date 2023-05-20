@@ -76,7 +76,7 @@ export const LoginModule = () => {
         message={watch("password") === "" && !errors.password ? "" : errors.password ? errors.password?.message : "Kata Sandi Valid"}
         required
       />
-      <Button loading={isLoading} disabled={!isValid} type="submit" variant="primary" size="md">
+      <Button loading={`${isLoading}`} disabled={!isValid} type="submit" variant="primary" size="md">
         Masuk
       </Button>
       <span className="text-sm text-gray-600">
