@@ -54,7 +54,8 @@ export const RegisterModule = () => {
   const onSubmit = handleSubmit((data) => {
     mutate(data, {
       name: data.fullname,
-      ...data
+      email: data.email,
+      password: data.password
     }, {
         onSuccess: () => {
           navigate("/", { replace: true })
