@@ -6,6 +6,9 @@ export const useLogin = () => {
   return useMutation({
     mutationKey: ["login-request"],
     mutationFn: async (payload) => await loginRequest(payload),
-    onSuccess: (data) => TokenService.saveToken(data?.token?.value)
+    onSuccess: (data) => {
+      TokenService.saveToken(data?.token?.value)
+      TokenService.saveUserData(data?.user)
+    } 
   })
 }
