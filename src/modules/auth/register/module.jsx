@@ -52,7 +52,7 @@ export const RegisterModule = () => {
   const [errorMessage, setErrorMessage] = useState("")
 
   const onSubmit = handleSubmit((data) => {
-    mutate(data, {
+    mutate({
       name: data.fullname,
       email: data.email,
       password: data.password
