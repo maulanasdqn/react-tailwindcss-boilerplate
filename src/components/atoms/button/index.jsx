@@ -1,4 +1,6 @@
 import clsx from "clsx"
+import { LoadingSpinner } from "../loading"
+import { Link } from "react-router-dom"
 
 export const Button = (props) => {
 
@@ -20,15 +22,15 @@ export const Button = (props) => {
   const className = [...buttonVariant, ...buttonSize].join("")
 
   props.href && (
-    <button {...props} className={className}>
-      {props.children}
-    </button>
+    <Link to={props.href}>
+      <button {...props} className={className}>
+        {props.loading ? (<LoadingSpinner/>) : props.children}
+      </button>
+    </Link>
   ) 
   return (
-    <a href={props.href}>
-      <button {...props} className={className}>
-        {props.children}
-      </button>
-    </a>
+    <button {...props} className={className}>
+      {props.loading ? (<LoadingSpinner/>) : props.children}
+    </button>
   )
 }

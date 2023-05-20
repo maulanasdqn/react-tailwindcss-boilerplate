@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AuthLayout } from '@/layouts'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useRegister } from './hooks'
+import { useState } from 'react'
 
 export const RegisterModule = () => {
   
@@ -43,8 +45,25 @@ export const RegisterModule = () => {
     }
   })
 
+  const { mutate, isLoading } = useRegister()
+
+  const navigate = useNavigate()
+
+  const [errorMessage, setErrorMessage] = useState("")
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutate(data, {
+      name: data.fullname,
+      ...data
+    }, {
+        onSuccess: () => {
+          navigate("/", { replace: true })
+        },
+
+        onError: (error) => {
+          setErrorMessage(error.response?.data?.message);
+        }
+      })
   })
 
   return (
@@ -52,6 +71,7 @@ export const RegisterModule = () => {
       onSubmit={onSubmit}
       title="Mari Bergabung bersama kami"
       subtitle="Silahkan masukan data diri anda untuk memulai bisnis bersama kami"
+      errorMessage={errorMessage}
     >
       <TextField
         control={control}
@@ -97,8 +117,8 @@ export const RegisterModule = () => {
         message={watch("confirm_password") === "" && !errors.confirm_password ? "" : errors.confirm_password ? errors.confirm_password?.message : "Konfirmasi Kata Sandi Valid"}
         required
       />
-      <Button disabled={!isValid} type="submit" variant="primary" size="md">
-        Masuk
+      <Button loading={isLoading} disabled={!isValid} type="submit" variant="primary" size="md">
+        Daftar
       </Button>
       <span className="text-sm text-gray-600">
         Sudah punya akun? Masuk {" "}

@@ -1,5 +1,13 @@
+import { Suspense } from "react"
+import { lazily } from "react-lazily"
+import { LoadingSpinner } from "@/components"
+
+const { UserModule } = lazily(() => import("@/modules"))
+
 export const Me = () => {
   return (
-    <h1>Authenticated As </h1>
+    <Suspense fallback={<LoadingSpinner/>}>
+      <UserModule/>
+    </Suspense>
   )
 }

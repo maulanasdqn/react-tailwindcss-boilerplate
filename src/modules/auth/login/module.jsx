@@ -3,9 +3,15 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AuthLayout } from '@/layouts'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useLogin } from './hooks'
+import { useState } from 'react'
 
 export const LoginModule = () => {
+
+  const navigate = useNavigate()
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   const validationSchema = z.object({
     email: z.string()
@@ -28,8 +34,17 @@ export const LoginModule = () => {
     }
   })
 
+  const { mutate, isLoading } = useLogin()
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => {
+        navigate("/me", { replace: true })
+      },
+      onError: (error) => {
+        setErrorMessage(error.response?.data?.message)
+      }
+    })
   })
 
   return (
@@ -37,6 +52,7 @@ export const LoginModule = () => {
       onSubmit={onSubmit}
       title="Selamat datang kembali"
       subtitle="Silahkan masuk dengan akun yang sudah terdafatar"
+      errorMessage={errorMessage}
     >
       <TextField
         control={control}
@@ -60,7 +76,7 @@ export const LoginModule = () => {
         message={watch("password") === "" && !errors.password ? "" : errors.password ? errors.password?.message : "Kata Sandi Valid"}
         required
       />
-      <Button disabled={!isValid} type="submit" variant="primary" size="md">
+      <Button loading={isLoading} disabled={!isValid} type="submit" variant="primary" size="md">
         Masuk
       </Button>
       <span className="text-sm text-gray-600">
