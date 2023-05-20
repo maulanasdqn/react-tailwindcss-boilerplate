@@ -118,7 +118,7 @@ export const RegisterModule = () => {
         message={watch("confirm_password") === "" && !errors.confirm_password ? "" : errors.confirm_password ? errors.confirm_password?.message : "Konfirmasi Kata Sandi Valid"}
         required
       />
-      <Button loading={`${isLoading}`} disabled={!isValid} type="submit" variant="primary" size="md">
+      <Button loading={isLoading} disabled={!isValid} type="submit" variant="primary" size="md">
         Daftar
       </Button>
       <span className="text-sm text-gray-600">

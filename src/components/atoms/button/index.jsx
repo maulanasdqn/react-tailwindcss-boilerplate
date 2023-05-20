@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { LoadingSpinner } from "../loading"
 import { Link } from "react-router-dom"
 
-export const Button = (props) => {
+export const Button = ({loading = false,...props}) => {
 
   const buttonSize = clsx("w-full h-auto hover:opacity-75",{
     "p-2 text-sm": props.size === "sm",
@@ -24,13 +24,13 @@ export const Button = (props) => {
   props.href && (
     <Link to={props.href}>
       <button {...props} className={className}>
-        {props.loading ? (<LoadingSpinner/>) : props.children}
+        {loading ? (<LoadingSpinner/>) : props.children}
       </button>
     </Link>
   ) 
   return (
     <button {...props} className={className}>
-      {props.loading ? (<LoadingSpinner/>) : props.children}
+      {loading ? (<LoadingSpinner/>) : props.children}
     </button>
   )
 }
