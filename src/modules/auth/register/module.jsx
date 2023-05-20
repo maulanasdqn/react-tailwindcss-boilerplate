@@ -6,7 +6,6 @@ import { AuthLayout } from '@/layouts'
 import { Link } from "react-router-dom"
 
 export const RegisterModule = () => {
-
   
   const validationSchema = z
   .object({
@@ -23,14 +22,14 @@ export const RegisterModule = () => {
     .min(1, { message: 'Kata sandi tidak boleh kosong' })
     .min(8, { message: 'Kata sandi harus 8 karakter atau lebih' }),
     confirm_password: z
-      .string()
-      .min(1, { message: 'Konfirmasi kata sandi tidak boleh kosong' })
-      .min(8, { message: 'Konfirmasi kata sandi harus 8 karakter atau lebih' }),
+    .string()
+    .min(1, { message: 'Konfirmasi kata sandi tidak boleh kosong' })
+    .min(8, { message: 'Konfirmasi kata sandi harus 8 karakter atau lebih' }),
   })
-  .refine((data) => data.password === data.confirm_password, {
+    .refine((data) => data.password === data.confirm_password, {
     message: 'Konfirmasi kata sandi tidak valid',
     path: ['confirm_password'],
-  });
+  })
 
 
   const { control, handleSubmit, watch, formState: { isValid, errors } } = useForm({

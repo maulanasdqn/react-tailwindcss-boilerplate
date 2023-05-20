@@ -4,13 +4,10 @@ import { lazily } from 'react-lazily'
 
 const { RegisterModule } = lazily(() => import("@/modules"))
 
-const Register = () => {
-
+export const Register = () => {
   return (
    <Suspense fallback={<RegisterModuleSkeleton/>}>
       <RegisterModule/>
    </Suspense>
   )
 }
-
-export default Register

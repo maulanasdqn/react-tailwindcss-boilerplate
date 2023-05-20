@@ -1,15 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "@/pages";
-import Register from "@/pages/daftar";
+import { AuthWraper } from "@/layouts"
+import { Register, Login } from "@/pages";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>
-  },
-  {
-    path: "/daftar",
-    element: <Register/>
-  }
+    element: <AuthWraper/>,
+    children: [
+      {
+        path: "/",
+        element: <Login/>
+      },
+      {
+        path: "/daftar",
+        element: <Register/>
+      }
 
+    ]
+  },
 ])

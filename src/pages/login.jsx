@@ -4,7 +4,7 @@ import { LoginModuleSkeleton } from "@/modules"
 
 const { LoginModule } = lazily(() => import("@/modules"))
 
-const Home = () => {
+export const Login = () => {
 
   return (
    <Suspense fallback={<LoginModuleSkeleton/>}>
@@ -12,5 +12,3 @@ const Home = () => {
    </Suspense>
   )
 }
-
-export default Home
