@@ -1,6 +1,6 @@
-import { api } from "@/services"
+import { api } from "@/services";
 
 export const registerRequest = async (payload) => {
-  const { data } = await api.post("/register", payload)
-  return data
-}
+  const { data } = await api.post("/auth/register", payload);
+  return data;
+};
