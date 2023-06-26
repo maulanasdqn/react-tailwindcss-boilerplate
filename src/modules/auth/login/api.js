@@ -1,6 +1,6 @@
-import { api } from "@/services"
+import { api } from "@/services";
 
 export const loginRequest = async (payload) => {
-  const { data } = await api.post("/login", payload)
-  return data
-}
+  const { data } = await api.post("/auth/login", payload);
+  return data;
+};
